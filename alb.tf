@@ -3,14 +3,14 @@
 resource "aws_lb" "ApplicationLoadBalancer" {
   name                       = "Mytestalb"
   load_balancer_type         = "application"
-  internal                   = false
+  internal                   = true
   ip_address_type            = "ipv4"
   security_groups            = ["sg-086b05e752f92c7f5"]
   subnets                    = ["subnet-0c1a9d3194d60eb18","subnet-038ca5d4a4fe4a0c9"]
   enable_deletion_protection = false
   idle_timeout               = 60
   desync_mitigation_mode     = "defensive"
-  drop_invalid_header_fields = false
+  drop_invalid_header_fields = true
   enable_http2               = true
   enable_waf_fail_open       = false
 

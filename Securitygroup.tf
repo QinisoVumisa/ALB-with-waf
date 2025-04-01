@@ -7,28 +7,28 @@ resource "aws_security_group" "albsecuritygroup1" {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["192.168.1.0/24"]
     description = "Allow HTTP traffic"
   }
   ingress {
     from_port   = -1
     to_port     = -1
     protocol    = "icmp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["192.168.1.0/24"]
     description = "Allow Pings"
   }
   ingress {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["192.168.1.0/24"]
     description = "Allow HTTPS traffic"
   }
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["192.168.1.0/24"]
     description = "Allow SSH traffic"
   }
 
@@ -36,14 +36,14 @@ resource "aws_security_group" "albsecuritygroup1" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["192.168.1.0/24"]
   }
 
     ingress {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["192.168.1.0/24"]
     description = "Allow HTTPS traffic"
   }
 
@@ -58,28 +58,28 @@ resource "aws_security_group" "ec2-webserver-sg" {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["192.168.1.0/24"]
     description = "Allow HTTP traffic"
   }
   ingress {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["192.168.1.0/24"]
     description = "Allow HTTPS traffic"
   }
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["192.168.1.0/24"]
     description = "Allow SSH traffic"
   }
    ingress {
     from_port   = -1
     to_port     = -1
     protocol    = "icmp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["192.168.1.0/24"]
     description = "Allow Pings"
   }
 
