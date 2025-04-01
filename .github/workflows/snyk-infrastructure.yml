@@ -10,45 +10,27 @@
 # For more examples, including how to limit scans to only high-severity issues
 # and fail PR checks, see https://github.com/snyk/actions/
 
-name: Snyk Infrastructure as Code
+name: Snyk Terraform IaC Scan
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   pull_request:
-    branches: [ "main" ]
-  schedule:
-    - cron: '20 13 * * 1'
-
-permissions:
-  contents: read
+    branches:
+      - main
 
 jobs:
-  snyk:
-    permissions:
-      contents: read # Required for actions/checkout
-      security-events: write # Needed for uploading SARIF results
-      actions: read # Only needed for private repositories
-
+  snyk_scan:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
-      - name: Install Snyk CLI
-        run: npm install -g snyk
+      - name: Set up Snyk
+        uses: snyk/actions/setup@master
 
-      - name: Run Snyk IaC scan and generate SARIF report
-        continue-on-error: true
+      - name: Run Snyk Infrastructure as Code scan
+        run: snyk iac test
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        run: snyk iac test --sarif-file-output=snyk.sarif your-file-to-test.yaml
-
-      - name: Verify SARIF file exists
-        run: ls -l snyk.sarif || echo "SARIF file not found!"
-
-      - name: Upload SARIF results to GitHub Code Scanning
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: snyk.sarif
