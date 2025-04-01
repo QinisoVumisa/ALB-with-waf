@@ -14,7 +14,11 @@ resource "aws_instance" "Ec2Instance" {
   sudo systemctl enable apache2
   echo "The page was created by the user data" | sudo tee /var/www/html/index.html
   EOF 
-  
+
+  root_block_device {
+    encrypted = true
+  } 
+
   tags = {
     Name = "mywebserver"
   }
