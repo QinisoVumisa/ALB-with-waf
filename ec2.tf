@@ -18,7 +18,9 @@ resource "aws_instance" "Ec2Instance" {
   root_block_device {
     encrypted = true
   } 
-
+  metadata_options {
+    http_tokens = "required"
+  }
   tags = {
     Name = "mywebserver"
   }
