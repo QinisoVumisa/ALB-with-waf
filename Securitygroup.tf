@@ -39,6 +39,14 @@ resource "aws_security_group" "albsecuritygroup1" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+    ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "Allow HTTPS traffic"
+  }
+
 }
 
 resource "aws_security_group" "ec2-webserver-sg" {
